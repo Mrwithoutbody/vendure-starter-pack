@@ -7,7 +7,11 @@ import {
 import { defaultEmailHandlers, EmailPlugin } from "@vendure/email-plugin";
 import { AssetServerPlugin } from "@vendure/asset-server-plugin";
 import path from "path";
+
+/* PLUGINS */
 // import { ExternalPlugin } from "./ExternalPlugin";
+import { UserMessagesPlugin } from "./UserMessagesPlugin";
+
 
 export const config: VendureConfig = {
   apiOptions: {
@@ -51,6 +55,7 @@ export const config: VendureConfig = {
   customFields: {},
   plugins: [
     // ExternalPlugin,
+    UserMessagesPlugin,
     AssetServerPlugin.init({
       route: "assets",
       assetUploadDir: path.join(__dirname, "../static/assets"),
