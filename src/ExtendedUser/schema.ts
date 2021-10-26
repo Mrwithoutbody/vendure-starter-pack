@@ -39,6 +39,26 @@ const profileSchema = gql`
   }
 `;
 
+const addressSchema = gql`
+  type PhysicalAddress {
+    street: String!
+  }
+
+  input PhysicalAddressInput {
+    street: String!
+  }
+
+  extend type Query {
+    getPhysicalAddresses: [PhysicalAddress]
+  }
+
+  extend type Mutation {
+    # add creation mutation here
+    createPhysicalAddress(input: PhysicalAddressInput!): PhysicalAddress
+  }
+`;
+
 export const schemaExtension = gql`
   ${profileSchema}
-`; 
+  ${addressSchema}
+`;

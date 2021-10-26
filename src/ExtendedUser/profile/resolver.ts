@@ -1,10 +1,11 @@
 import { Query, Resolver, Mutation, Args } from "@nestjs/graphql";
 
-import { Ctx, RequestContext, Allow, Transaction } from "@vendure/core";
+import { Ctx, RequestContext, Allow, Transaction, Administrator } from "@vendure/core";
 
 import { CreateAdministratorWithProfileInput } from "./entity";
 import { ProfileService } from "./profileService";
 import { CUSTOM_PERMISSION } from "./customPermission";
+import { ListWithItems } from "../advancedQuery";
 
 type RegisterAdminWithProfile = {
   input: CreateAdministratorWithProfileInput;

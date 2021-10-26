@@ -1,5 +1,5 @@
-import { VendureEntity, Administrator } from "@vendure/core";
-import { Column, Entity, OneToOne, JoinColumn } from "typeorm";
+import { VendureEntity, Administrator, Address } from "@vendure/core";
+import { Column, Entity, OneToOne, JoinColumn, ManyToOne, ManyToMany } from "typeorm";
 import { DeepPartial } from "@vendure/common/lib/shared-types";
 
 export type CreateAdministratorWithProfileInput = {
@@ -19,11 +19,10 @@ export class Profile extends VendureEntity {
     super(input);
   }
 
-  @Column({ default: false })
+  @Column({ default: false, nullable: false })
   blocked!: boolean;
 
   @OneToOne(() => Administrator, { nullable: false, eager: true })
   @JoinColumn()
   user!: Administrator;
 }
-
