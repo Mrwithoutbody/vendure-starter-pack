@@ -2,7 +2,7 @@ import { VendureEntity, Administrator } from "@vendure/core";
 import { Column, Entity, OneToOne, JoinColumn } from "typeorm";
 import { DeepPartial } from "@vendure/common/lib/shared-types";
 
-export type CreateUserInput = {
+export type CreateAdministratorWithProfileInput = {
   firstName: string;
   lastName: string;
   emailAddress: string;
@@ -26,5 +26,4 @@ export class Profile extends VendureEntity {
   @JoinColumn()
   user!: Administrator;
 }
-
 

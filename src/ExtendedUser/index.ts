@@ -2,10 +2,6 @@ import { PluginCommonModule, VendurePlugin } from "@vendure/core";
 import { NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { schemaExtension } from "./schema";
 
-import { Note } from "./note/entity";
-import { NoteService } from "./note/service";
-import { NoteResolver } from "./note/resolver";
-
 import {
   CUSTOM_PERMISSION_ARR,
   Profile,
@@ -16,19 +12,18 @@ import {
 
 import { SeedingMiddleware } from "./seedingMeddleware";
 
-
 @VendurePlugin({
   entities: [
-    Note,
+    Profile,
   ],
   imports: [PluginCommonModule],
-  providers: [
-    NoteService,
+  providers: [  
+    ProfileService,
   ],
   adminApiExtensions: {
     schema: schemaExtension,
     resolvers: [
-      NoteResolver,
+      ProfileResolver,
     ],
   },
   configuration: (config) => {
@@ -36,7 +31,7 @@ import { SeedingMiddleware } from "./seedingMeddleware";
     return config;
   },
 })
-export class UserMessagesPlugin implements NestModule {
+export class ExtendedUser implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(SeedingMiddleware).forRoutes("*");
   }

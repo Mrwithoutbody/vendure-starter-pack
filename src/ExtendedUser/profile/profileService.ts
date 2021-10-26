@@ -9,8 +9,8 @@ import {
   Administrator,
 } from "@vendure/core";
 
-import { Profile,  CreateUserInput, ExtendedAdministrator } from "./entity";
-import { NOTES_ROLES } from "./customRole";
+import { Profile, CreateAdministratorWithProfileInput, ExtendedAdministrator } from "./entity";
+import { CUSTOM_ROLES } from "./customRole";
 
 import { ListWithItems, listWithItems } from "../advancedQuery";
 
@@ -38,12 +38,12 @@ export class ProfileService {
 
   async registerByPassword(
     ctx: RequestContext,
-    args: CreateUserInput,
-    _role: keyof typeof NOTES_ROLES
+    args: CreateAdministratorWithProfileInput,
+    _role: keyof typeof CUSTOM_ROLES
   ): Promise<ExtendedAdministrator | undefined> {
     const role = await this.connection
       .getRepository(ctx, Role)
-      .findOne({ where: { code: NOTES_ROLES[_role].code } });
+      .findOne({ where: { code: CUSTOM_ROLES[_role].code } });
 
     if (!role) return;
 

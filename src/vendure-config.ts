@@ -9,8 +9,7 @@ import { AssetServerPlugin } from "@vendure/asset-server-plugin";
 import path from "path";
 
 /* PLUGINS */
-// import { ExternalPlugin } from "./ExternalPlugin";
-import { UserMessagesPlugin } from "./UserMessagesPlugin";
+import { ExtendedUser } from "./ExtendedUser";
 
 
 export const config: VendureConfig = {
@@ -54,8 +53,7 @@ export const config: VendureConfig = {
   },
   customFields: {},
   plugins: [
-    // ExternalPlugin,
-    UserMessagesPlugin,
+    ExtendedUser,
     AssetServerPlugin.init({
       route: "assets",
       assetUploadDir: path.join(__dirname, "../static/assets"),

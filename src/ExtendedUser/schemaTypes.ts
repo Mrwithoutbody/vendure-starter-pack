@@ -13,6 +13,8 @@ export type VendureNode = {
   updatedAt: Date;
 };
 
+type AggregateType = "SUM" | "MIN" | "MAX" | "AVG" | "COUNT";
+
 export type AggregateArgs = {
   aggregateType: AggregateType;
   field: string;

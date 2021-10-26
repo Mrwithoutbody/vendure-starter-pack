@@ -17,42 +17,32 @@ const commonPermissions = permissions.filter(
   (p) => !permissionsToOmit.includes(p)
 );
 
-const userPermissions = [
+const creatorPermissions = [
   ...commonPermissions,
-  CUSTOM_PERMISSION.NOTE_VIEW.Permission,
-  CUSTOM_PERMISSION.NOTE_ADD.Permission,
+  CUSTOM_PERMISSION.CREATE_CONTENT.Permission,
 ];
-const ownerPermissions = [
-  ...userPermissions,
-  CUSTOM_PERMISSION.OWN_NOTE_MANAGE.Permission,
-];
+
 const adminPermissions = [
-  ...ownerPermissions,
-  CUSTOM_PERMISSION.ALL_NOTE_MANAGE.Permission,
+  ...creatorPermissions,
+  /* add extra admin permission here */
 ];
 
-export type NotesRoles = "ADMIN" | "OWNER" |  "USER";
+export type CustomRoles = "ADMIN" |"CREATOR";
 
-export const NOTES_ROLES: Record<
-  NotesRoles,
+export const CUSTOM_ROLES: Record<
+  CustomRoles,
   Pick<Role, "code" | "description" | "channels" | "permissions">
 > = {
   ADMIN: {
-    code: "__notes_admin__",
-    description: "Admin profile",
+    code: "__admin_user__",
+    description: "user admin",
     channels: [{ id: 1 }] as Role["channels"],
     permissions: adminPermissions,
   },
-  OWNER: {
-    code: "__notes_owner__",
-    description: "Owner profile",
+  CREATOR: {
+    code: "__creator_user__",
+    description: "user creator",
     channels: [{ id: 1 }] as Role["channels"],
-    permissions: ownerPermissions,
-  },
-  USER: {
-    code: "__notes_user__",
-    description: "Basic user profile",
-    channels: [{ id: 1 }] as Role["channels"],
-    permissions: userPermissions,
+    permissions: creatorPermissions,
   },
 };

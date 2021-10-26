@@ -2,7 +2,7 @@ import { Role, User } from "@vendure/core";
 import { NestMiddleware, Injectable } from "@nestjs/common";
 import { EntityManager } from "typeorm";
 
-import { Profile, NOTES_ROLES } from "./profile";
+import { Profile, CUSTOM_ROLES } from "./profile";
 
 @Injectable()
 export class SeedingMiddleware implements NestMiddleware {
@@ -28,14 +28,14 @@ export class SeedingMiddleware implements NestMiddleware {
     this.isSeedingComplete = (async () => {
       if (
         !(await this.entityManager.findOne(Role, {
-          where: { code: NOTES_ROLES.ADMIN.code },
+          where: { code: CUSTOM_ROLES.ADMIN.code },
         }))
       ) {
         await this.entityManager.transaction(
           async (transactionalEntityManager) => {
             await transactionalEntityManager.save(
               Role,
-              Object.values(NOTES_ROLES)
+              Object.values(CUSTOM_ROLES)
             );
           }
         );
@@ -48,7 +48,7 @@ export class SeedingMiddleware implements NestMiddleware {
         await this.entityManager.transaction(
           async (transactionalEntityManager) => {
             const adminRole = await transactionalEntityManager.findOne(Role, {
-              where: { code: NOTES_ROLES.ADMIN.code },
+              where: { code: CUSTOM_ROLES.ADMIN.code },
             });
             await transactionalEntityManager.save(User, {
               id: 1,
